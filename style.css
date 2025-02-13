@@ -1,0 +1,72 @@
+/* font-family: "Inspiration", serif; */
+/* font-family: "Outfit", serif; */
+
+:root{
+  --logo-font: "Inspiration", serif;
+  --primary-font: "Outfit", serif;
+  --red-color: #e52333;
+}
+
+*{
+  margin: 0%;
+  padding: 0%;
+  font-family: var(--primary-font);
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px 40px;
+}
+
+.logoContainer .logo{
+  font-family: var(--logo-font);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: var(--red-color);
+}
+
+.nav-items ul{
+  display: flex;
+}
+
+.nav-items ul li{
+  padding: 0 15px;
+  margin: 5px;
+  list-style: none;
+}
+
+.res-container{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10px;
+}
+
+.res-card{
+  width: 200px;
+  height: auto;
+  padding: 5px;
+  margin: 6px 12px;
+}
+
+.res-card:hover{
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.res-image{
+  width: 100%;
+}
+
+.filter{
+  padding: 10px;
+}
+.filter-btn{
+  margin: 10px;
+  padding: 3px;
+  cursor: pointer;
+}
