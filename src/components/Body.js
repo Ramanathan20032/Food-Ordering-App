@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockdata";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 // Body Component
 const Body = () => {
@@ -38,6 +39,7 @@ const Body = () => {
     }
   }
 
+  // conditional Rendering (?:) Shimmer UI
   return listOfRestaurant.length === 0 ? (<Shimmer/>) : (
     <div className="body">
       <div className="search-filter">
@@ -69,7 +71,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link to={"/restaurant/" + restaurant.info.id} key={restaurant.info.id}>
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
