@@ -123,3 +123,9 @@ a{
 .menu-title{
   color: #BE5985;
 }
+
+.user-card{
+  padding: 10px;
+  margin: 10px 0px;
+  border: 1px solid black;
+}
