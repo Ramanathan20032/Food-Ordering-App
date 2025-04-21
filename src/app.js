@@ -1,48 +1,66 @@
-import React from "react";
-import ReactDOM from "react-dom/client"
+import React, { Suspense, lazy } from "react";
+import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import About from "./components/About";
+// import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+// import Grocery from "./components/Grocery";
 
+const About = lazy(() => {
+  return import("./components/About");
+});
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
   return (
     <React.Fragment>
-      <Header/>
-      <Outlet/>
+      <Header />
+      <Outlet />
     </React.Fragment>
-  )
-}
+  );
+};
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout/>,
+    element: <AppLayout />,
     children: [
       {
         path: "/",
-        element: <Body/>
+        element: <Body />,
       },
       {
         path: "/about",
-        element: <About/>
+        element: (
+          <Suspense fallback={<h3>Loading About...</h3>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
-        element: <Contact/>
+        element: <Contact />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h3>Loading Grocery...</h3>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurant/:resId",
-        element: <RestaurantMenu/>
-      }
+        element: <RestaurantMenu />,
+      },
     ],
-    errorElement: <Error/>
+    errorElement: <Error />,
   },
-])
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter}/>)
+root.render(<RouterProvider router={appRouter} />);

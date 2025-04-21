@@ -3,40 +3,19 @@ import resList from "../utils/mockdata";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useRestaurant from "../utils/useRestaurant";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // Body Component
 const Body = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState([]);
-  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
+  
+  const [listOfRestaurant, filteredRestaurant, setFilteredRestaurant] = useRestaurant();
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    console.log("useEffect Called");
-    fetchData();
-  }, []);
+  const onlineStatus = useOnlineStatus();
 
-  // console.log("Body Rendered");
-
-  const fetchData = async () => {
-    try{
-      const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
-      if(!response.ok){
-        throw new error(`API Response : ${response.status}`)
-      }
-
-      const jsonData = await response.json();
-      console.log(jsonData);
-
-      // updating the state variable.
-      // setListOfRestaurants(jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-      // Optional chaining (?.)
-      setListOfRestaurant(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setFilteredRestaurant(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    }
-    catch(error){
-      console.log("Error Fetching Data : ", error);
-    }
+  if(onlineStatus === false){
+    return <h2 className="online-status">Seems u'r internet is Not Connected</h2>
   }
 
   // conditional Rendering (?:) Shimmer UI
