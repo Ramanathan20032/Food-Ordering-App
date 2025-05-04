@@ -33,20 +33,21 @@ class UserClass extends React.Component {
     const { name, bio, login } = this.state.userInfo;
 
     return (
-      <div className="user-card">
+      <div className="bg-purple-100 border-2 border-y-sky-950 rounded-lg p-5 w-fit">
         <button
+          className="bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 mb-3 rounded-md cursor-pointer transition-all duration-300"
           onClick={() => {
             this.setState({
               count: this.state.count + 1,
             });
           }}
         >
-          Increase Button
+          Increase Counter
         </button>
-        <h6>Conut : {count}</h6>
-        <h2>Name : {name}</h2>
+        <h6>Counter : {count}</h6>
+        <h2 className="text-teal-900 font-bold text-xl">Name : {name}</h2>
         <h3>Bio : {bio}</h3>
-        <h4>Login : {login}</h4>
+        <h4 className="text-sm">Login : {login}</h4>
       </div>
     );
   }
