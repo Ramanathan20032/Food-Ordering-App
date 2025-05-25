@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { withVegPromotedLabel } from "./RestaurantCard";
 
 // Body Component
 const Body = () => {
@@ -12,7 +13,11 @@ const Body = () => {
     useRestaurant();
   const [searchText, setSearchText] = useState("");
 
+  // custom hook to find the online status
   const onlineStatus = useOnlineStatus();
+
+  // higher order component call
+  const RestaurantCardVegPromoted = withVegPromotedLabel(RestaurantCard);
 
   if (onlineStatus === false) {
     return (
@@ -69,7 +74,12 @@ const Body = () => {
             to={"/restaurant/" + restaurant.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+            {/* if restaurant is veg promoted then render vegPromoted Component */}
+            {restaurant.info.veg ? (
+              <RestaurantCardVegPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

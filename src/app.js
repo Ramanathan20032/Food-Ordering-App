@@ -13,7 +13,10 @@ const About = lazy(() => {
   return import("./components/About");
 });
 
-const Grocery = lazy(() => import("./components/Grocery"));
+const Grocery = lazy(() => {
+  return import("./components/Grocery")
+});
+ 
 
 const AppLayout = () => {
   return (

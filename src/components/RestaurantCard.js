@@ -24,4 +24,20 @@ const RestaurantCard = (props) => {
   );
 };
 
+// ! Higher Order Component - To Render the Restaurant card with veg promoted label
+// ? input -> RestaurantCard   : output -> RestaurantCard with promoted Label
+
+export const withVegPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <>
+        <label className="absolute bg-green-500 text-white rounded-md text-sm px-3 py-1 m-2 ml-3 mt-3">
+          Veg
+        </label>
+        <RestaurantCard {...props}/>
+      </>
+    )
+  }
+}
+
 export default RestaurantCard;
