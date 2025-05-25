@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -34,6 +35,12 @@ class UserClass extends React.Component {
 
     return (
       <div className="bg-purple-100 border-2 border-y-sky-950 rounded-lg p-5 w-fit">
+        <p>
+          {/* To access the useContext in class Component */}
+          <UserContext.Consumer>
+            {({loggedInUser}) => <h2 className="mb-2">User : {loggedInUser}</h2>}
+          </UserContext.Consumer>
+        </p>
         <button
           className="bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 mb-3 rounded-md cursor-pointer transition-all duration-300"
           onClick={() => {

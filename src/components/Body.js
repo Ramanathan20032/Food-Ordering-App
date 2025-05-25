@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockdata";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestaurant from "../utils/useRestaurant";
@@ -13,10 +13,10 @@ const Body = () => {
     useRestaurant();
   const [searchText, setSearchText] = useState("");
 
-  // custom hook to find the online status
+  // ! custom hook to find the online status
   const onlineStatus = useOnlineStatus();
 
-  // higher order component call
+  // ! higher order component call
   const RestaurantCardVegPromoted = withVegPromotedLabel(RestaurantCard);
 
   if (onlineStatus === false) {
