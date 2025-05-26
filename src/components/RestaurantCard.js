@@ -1,24 +1,53 @@
 import { CON_URL } from "../utils/constants";
+import greenStar from "../assets/images/green-star-icon.png";
 
 // RestaurantCard Component
 const RestaurantCard = (props) => {
   const { resData } = props;
-  const { name, avgRating, cuisines, costForTwo, cloudinaryImageId } =
+  console.log("resData : ", resData);
+  const { name, avgRating, cuisines, costForTwo, cloudinaryImageId, areaName } =
     resData?.info;
-  const { deliveryTime } = resData?.info?.sla;
+  const {header, subHeader} = resData?.info?.aggregatedDiscountInfoV3 || {};
+  const { deliveryTime, slaString } = resData?.info?.sla;
   return (
-    <div className="p-3 w-[200px] bg-gray-100 hover:bg-gray-200 hover:border rounded-lg hover:border-gray-400 transition duration-300 flex flex-col h-full min-h-[300px]">
-      <img
-        src={CON_URL + cloudinaryImageId}
-        alt="res-image"
-        className="res-image rounded-lg"
-      />
-      <h3 className="text-lg font-bold pt-1">{name}</h3>
-      <h4>{cuisines?.join(", ") || "N/A"}</h4>
-      <h4>{costForTwo}</h4>
-      <div className="flex items-center justify-between">
-        <h4>{deliveryTime} Min</h4>
-        <h4>{avgRating} stars</h4>
+    <div className="w-[230px] bg-white rounded-xl transition duration-300 flex flex-col h-full min-h-[265px] hover:scale-95">
+      {/* Restaurant Image */}
+      <div className="relative">
+        <img
+          src={CON_URL + cloudinaryImageId}
+          alt={name}
+          className="rounded-xl w-full h-[150px] object-cover"
+        />
+        {/* Bottom black shadow overlay */}
+        <div className="absolute bottom-0 left-0 w-full h-14 bg-gradient-to-t from-black/100 to-transparent rounded-b-xl pointer-events-none"></div>
+        {/* Header and SubHeader Tag */}
+        {header && subHeader && (
+          <div className="absolute bottom-1 left-1 bg-opacity-70 text-white text-md font-bold px-2 py-0.5">
+            {header} {subHeader}
+          </div>
+        )}
+      </div>
+
+      {/* Restaurant Data */}
+      <div className="p-2"> 
+        {/* Restaurant Name */}
+        <h3 className="text-md text-black font-bold truncate">{name}</h3>
+        {/* Rating, Time, Price */}
+        <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+          <span className="flex items-center font-semibold">
+             <img src={greenStar} alt="Green Star Icon" className="w-5" />
+             {avgRating}
+          </span>
+          <div className="mt-1 w-1 h-1 bg-gray-500 rounded-full"></div>
+          <span>{slaString}</span>
+        </div>
+
+        {/* Cuisines, Area */}
+        <p className="text-sm text-gray-600 truncate">
+          {cuisines?.join(", ") || "N/A"}
+        </p>
+        <p className="text-sm text-gray-700">{areaName ||"Unknown Area"}</p>
+        
       </div>
     </div>
   );
@@ -30,12 +59,12 @@ const RestaurantCard = (props) => {
 export const withVegPromotedLabel = (RestaurantCard) => {
   return (props) => {
     return (
-      <>
-        <label className="absolute bg-green-500 text-white rounded-md text-sm px-3 py-1 m-2 ml-3 mt-3">
+      <div className="relative">
+        <label className="absolute right-0 top-0 bg-green-500 text-white rounded-md text-sm px-3 py-1 z-10">
           Veg
         </label>
         <RestaurantCard {...props}/>
-      </>
+      </div>
     )
   }
 }

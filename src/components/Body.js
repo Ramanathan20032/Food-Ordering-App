@@ -30,7 +30,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body max-w-6xl mx-auto">
-      <div className="search-filter search-filter flex items-center p-5 pb-3 bg-white">
+      <div className="search-filter search-filter flex items-center justify-center p-5 pb-3 bg-white">
         <div className="search">
           <input
             type="text"
@@ -68,7 +68,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap p-5 gap-5">
+      <div className="flex flex-wrap p-5 gap-5 justify-center">
         {filteredRestaurant.map((restaurant) => (
           <Link
             to={"/restaurant/" + restaurant.info.id}
