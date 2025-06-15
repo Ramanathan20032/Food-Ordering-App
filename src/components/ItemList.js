@@ -1,8 +1,18 @@
+import { useDispatch } from "react-redux";
 import { CON_URL } from "../utils/constants";
 import { StarIcon as StarSolid } from "@heroicons/react/24/solid";
+import { addCartItem } from '../utils/cartSlice'
+
 
 const ItemList = ({itemData}) => {
   // console.log(itemData)
+
+  const Dispatch = useDispatch()
+  
+  const handleAddItem = (itemData) => {
+    Dispatch(addCartItem(itemData))
+  }
+
   return(
     <>
       <div className="flex items-center justify-between my-5 pb-3 border-b-1 border-gray-400">
@@ -24,7 +34,8 @@ const ItemList = ({itemData}) => {
         </div>
         <div className="w-3/12 flex justify-center relative">
           <img src={CON_URL + itemData?.imageId} className="w-32 rounded-md" alt={itemData?.name}/>
-          <button className="absolute text-sm bg-black hover:bg-gray-700 text-white cursor-pointer px-2 py-1 bottom-0 rounded-md">
+          <button className="absolute text-sm bg-black hover:bg-gray-700 text-white cursor-pointer px-2 py-1 bottom-0 rounded-md" 
+            onClick={() => handleAddItem(itemData)}>
             ADD +
           </button>
         </div>

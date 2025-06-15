@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 // Header Component
 const Header = () => {
@@ -11,7 +12,11 @@ const Header = () => {
   // console.log("Header Component");
   // ! useContext
   // ? useContext is used to access the data from the context object.
-  const {loggedInUser} = useContext(UserContext);
+  const { loggedInUser } = useContext(UserContext);
+
+  // ! useSelector
+  const cartItems = useSelector((store) => store.cart.items);
+  // console.log({ cartItems });
 
   return (
     <div className="flex justify-between items-center py-3 px-6 bg-purple-100 shadow-lg sticky top-0 z-50">
@@ -35,7 +40,9 @@ const Header = () => {
           <li className="px-3">
             <Link to="/contact">Contact</Link>
           </li>
-          <li className="px-3">Cart</li>
+          <li className="px-3 font-medium">
+            <Link to="/cart">Cart - ({cartItems.length} items)</Link>
+          </li>
           <li className="pl-3">
             <button
               className="bg-red-400 hover:bg-red-500 text-white text-sm px-4 pb-1 rounded-md cursor-pointer transition-all duration-300"
@@ -46,7 +53,7 @@ const Header = () => {
               }}
             >
               <>
-                {btnName} <br/> {loggedInUser}
+                {btnName} <br /> {loggedInUser}
               </>
             </button>
           </li>

@@ -17,7 +17,7 @@ const useRestaurant = () => {
         throw new Error(`HTTP Error Status : ${response.status}`);
       }
       const jsonData = await response.json();
-      console.log("Restaurant Listing API : " + jsonData);
+      // console.log("Restaurant Listing API : " + jsonData);
 
       setListOfRestaurant(
         jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle

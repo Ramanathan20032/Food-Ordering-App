@@ -10,6 +10,11 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 // import Grocery from "./components/Grocery";
 import UserContext from "./utils/UserContext";
 
+import Cart from "./components/Cart";
+import { Provider } from 'react-redux';
+import appStore from "./utils/appStore";
+
+
 const About = lazy(() => {
   return import("./components/About");
 });
@@ -31,12 +36,14 @@ const AppLayout = () => {
   });
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName }}>
-      <React.Fragment>
-        <Header />
-        <Outlet />
-      </React.Fragment>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <React.Fragment>
+          <Header />
+          <Outlet />
+        </React.Fragment>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -56,6 +63,10 @@ const appRouter = createBrowserRouter([
             <About />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/contact",

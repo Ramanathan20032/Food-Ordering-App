@@ -1,5 +1,5 @@
 const ShimmerMenu = () => {
-  const dummyItems = new Array(5).fill(0); // simulate 5 items
+  const dummyItems = new Array(9).fill(0); // simulate 5 items
 
   return (
     <div className="my-5 menu-container p-5 max-w-3xl mx-auto bg-white shadow-lg rounded-lg animate-pulse">

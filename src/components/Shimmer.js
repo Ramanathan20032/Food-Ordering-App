@@ -1,12 +1,12 @@
 const Shimmer = () => {
   return (
-    <div className="flex flex-wrap justify-center p-5 gap-5 max-w-full mx-auto">
+    <div className="max-w-6xl mx-auto flex flex-wrap justify-center p-5 gap-5">
       {Array(15)
         .fill(0)
         .map((_, index) => (
           <div
             key={index}
-            className="w-[200px] p-3 bg-gray-100 rounded-lg flex flex-col min-h-[300px] animate-pulse"
+            className="w-[230px] p-3 bg-gray-100 rounded-lg flex flex-col min-h-[300px] animate-pulse"
           >
             {/* Image Placeholder */}
             <div className="h-[120px] bg-gray-300 rounded-lg mb-3"></div>
