@@ -10,7 +10,8 @@ const RestaurantCard = (props) => {
   const { header, subHeader } = resData?.info?.aggregatedDiscountInfoV3 || {};
   const { deliveryTime, slaString } = resData?.info?.sla;
   return (
-    <div className="w-[230px] bg-white rounded-xl transition duration-300 flex flex-col h-full min-h-[265px] hover:scale-95">
+    <div className="w-[230px] bg-white rounded-xl traansition duration-300 flex flex-col h-full min-h-[265px] hover:scale-95" 
+    data-testid="resCard">
       {/* Restaurant Image */}
       <div className="relative">
         <img

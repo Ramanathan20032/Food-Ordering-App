@@ -15,7 +15,7 @@ const ItemList = ({itemData}) => {
 
   return(
     <>
-      <div className="flex items-center justify-between my-5 pb-3 border-b-1 border-gray-400">
+      <div className="foodItems flex items-center justify-between my-5 pb-3 border-b-1 border-gray-400">
         <div className="w-9/12">
           <div className="text-md font-bold">{itemData?.name}</div>
           <p className="text-md font-mono">
